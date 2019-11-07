@@ -11,7 +11,7 @@ ALLOWED_MEASUREMENTS = [
     'ml',
 ]
 
-SHOTS = 30
+SHOTS = 30  # number of ml in a shot
 
 
 class StockLevelError(Exception):
@@ -106,9 +106,9 @@ def stock_take():
     for item_name, item_props in INVENTORY.items():
         stock[item_name] = {}
         # number of full bottles
-        stock[item_name]['full'] = item_props['stock'] // item_props['each_size']
+        stock[item_name]['full_stock'] = item_props['stock'] // item_props['each_size']
         # amount remaining in open bottles
-        stock[item_name]['open'] = item_props['stock'] % item_props['each_size']
+        stock[item_name]['open_stock'] = item_props['stock'] % item_props['each_size']
         # percentage of bottles available
         stock[item_name]['percentage'] = item_props['stock'] / item_props['each_size'] * 100
     return stock
