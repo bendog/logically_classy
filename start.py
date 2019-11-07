@@ -2,6 +2,7 @@
 from random import randrange, choice
 
 from functional.inventory import add_bottle, stock_take, StockLevelError, use_shot
+# from classy.inventory import add_bottle, stock_take, StockLevelError, use_shot
 from recipes import RECIPES
 
 
