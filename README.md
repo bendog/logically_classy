@@ -2,7 +2,7 @@
 
 a beginner friendly look at refactoring python logic to class methods
 
-![classy gangster spock](./imgages/gangsterspock.jpg)
+![classy gangster spock](images/logically_classy.png)
 
 `./functional` is the example for the function based code
 
