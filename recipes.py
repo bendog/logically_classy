@@ -3,7 +3,7 @@ RECIPES = {
     'tom collins': {
         'gin': 2,
         'lemon juice': 1,
-        'sugar syrup': 10,
+        'sugar syrup': 1/3,
         'soda': 3,
     },
     'martini': {

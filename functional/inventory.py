@@ -1,3 +1,8 @@
+SHOTS = 30  # number of ml in a shot
+
+ALLOWED_MEASUREMENTS = [
+    'ml',
+]
 
 INVENTORY = {
     'cognac': {
@@ -6,12 +11,6 @@ INVENTORY = {
         'stock': 1400,
     }
 }
-
-ALLOWED_MEASUREMENTS = [
-    'ml',
-]
-
-SHOTS = 30  # number of ml in a shot
 
 
 class StockLevelError(Exception):

@@ -4,6 +4,10 @@ from random import randrange, choice
 from functional.inventory import add_bottle, stock_take, StockLevelError, use_shot
 from recipes import RECIPES
 
+
+CRED = '\033[91m'
+CEND = '\033[0m'
+
 # setup bottles
 SPIRITS = [
     'gin',
@@ -33,7 +37,7 @@ def formatted_stock_take():
     response = ""
     for item_name, values in stock_take().items():
         percentage = values['percentage']
-        response += '%s: %s %% \n' % (item_name, percentage)
+        response += '%s: %.1f%% \n' % (item_name, percentage)
         while percentage > 99:
             # print full bottles
             response += '|%-20s|  ' % ('=' * 20)
@@ -55,7 +59,7 @@ def serve_drink(title, quantity):
                 use_shot(ingredient, amount)
             served += 1
         except StockLevelError as e:
-            print(e, ingredient, 'for', title)
+            print('warning', CRED, e, ingredient, 'for', title, CEND)
             break
     return served
 
@@ -67,28 +71,37 @@ for spirit_name in SPIRITS:
     add_bottle(spirit_name, quantity=randrange(1, 4))
 
 for mixer_name in MIXERS:
-    add_bottle(mixer_name, quantity=randrange(5, 8), each_size=375)
+    add_bottle(mixer_name, quantity=randrange(5, 6), each_size=375)
 
 # show the bar is full of stock
 
 print(formatted_stock_take())
-
+input()
 
 # take some orders
 
 
 orders = []
 
-while len(orders) < 8:
-    drink = choice(list(RECIPES.keys()))
-    ordered = randrange(1, 6)
-    served = serve_drink(drink, ordered)
-    orders.append({'drink': drink, 'ordered': ordered, 'served': served})
+while len(orders) < 12:
+    drink_choice = choice(list(RECIPES.keys()))
+    drinks_ordered = randrange(1, 9)
+    drinks_served = serve_drink(drink_choice, drinks_ordered)
+    orders.append({
+        'drink': drink_choice,
+        'ordered': drinks_ordered,
+        'served': drinks_served,
+    })
+
 
 for x in orders:
-    print(x)
+    print("ordered %s %s, served:" % (x['ordered'], x['drink']), end=' ')
+    if x['ordered'] != x['served']:
+        print(CRED + str(x['served']) + CEND)
+    else:
+        print(x['served'])
+# print the stock take
 
-
-# print the
+input()
 
 print(formatted_stock_take())
